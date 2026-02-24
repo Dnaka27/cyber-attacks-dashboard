@@ -4,6 +4,9 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 
+# TODO Ajuste de organização codigo
+# TODO Revisar lógica otimizada
+
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Cyber Attacks · Financial & Market Impact",
@@ -112,7 +115,6 @@ COUNTRY_NAMES = {
     "MX": "Mexico", "CH": "Switzerland", "SG": "Singapore", "KR": "South Korea",
 }
 
-# ── Data loading ──────────────────────────────────────────────────────────────
 @st.cache_data
 def load_data():
     fi = pd.read_csv("data/financial_impact.csv")
