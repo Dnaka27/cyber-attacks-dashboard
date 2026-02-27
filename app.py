@@ -51,10 +51,10 @@ st.markdown("---")
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
 tab1, tab2, tab3, tab4 = st.tabs([
-    "📈  Tendências",
-    "🎯  Ataques",
-    "💸  Impacto Financeiro",
-    "📉  Impacto de Mercado",
+    "Tendências",
+    "Ataques",
+    "Impacto Financeiro",
+    "Impacto de Mercado",
 ])
 
 with tab1:

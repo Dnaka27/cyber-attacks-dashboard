@@ -1,0 +1,87 @@
+import streamlit as st
+
+CSS = """
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+
+:root {
+    --bg:       #0a0c14;
+    --surface:  #111420;
+    --border:   #1e2235;
+    --accent:   #e63946;
+    --accent2:  #457b9d;
+    --accent3:  #f4a261;
+    --text:     #e8ecf4;
+    --muted:    #6b7399;
+}
+
+html, body, [data-testid="stAppViewContainer"] {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+    font-family: 'Syne', sans-serif;
+}
+
+[data-testid="stSidebar"] {
+    background-color: var(--surface) !important;
+    border-right: 1px solid var(--border);
+}
+[data-testid="stSidebar"] * { color: var(--text) !important; }
+
+[data-testid="metric-container"] {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px !important;
+    transition: border-color .2s;
+}
+[data-testid="metric-container"]:hover { border-color: var(--accent); }
+
+[data-testid="stMetricLabel"] {
+    color: var(--muted) !important;
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+[data-testid="stMetricValue"] {
+    color: var(--text) !important;
+    font-family: 'Space Mono', monospace;
+    font-size: 1.7rem !important;
+}
+
+h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.4rem !important;
+    background: linear-gradient(90deg, #e63946, #f4a261);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+h2, h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    color: var(--text) !important;
+}
+
+[data-testid="stTab"] button {
+    font-family: 'Space Mono', monospace;
+    font-size: .78rem;
+    color: var(--muted) !important;
+}
+[data-testid="stTab"] button[aria-selected="true"] {
+    color: var(--accent) !important;
+    border-bottom: 2px solid var(--accent) !important;
+}
+
+hr { border-color: var(--border) !important; }
+.js-plotly-plot { border-radius: 12px; border: 1px solid var(--border); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+"""
+
+
+def inject_css() -> None:
+    """Injeta o CSS global do dashboard."""
+    st.markdown(CSS, unsafe_allow_html=True)
