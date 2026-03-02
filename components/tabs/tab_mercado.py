@@ -41,7 +41,7 @@ def render(fdf: pd.DataFrame) -> None:
         fig15.update_layout(**PLOTLY_BASE)
         fig15.update_xaxes(tickangle=-30)
         fig15.update_yaxes(tickformat=".1%")
-        st.plotly_chart(fig15, use_container_width=True)
+        st.plotly_chart(fig15, width='stretch')
 
     with col_b:
         st.subheader("CAR 0→30 dias por Setor S&P 500")
@@ -54,7 +54,7 @@ def render(fdf: pd.DataFrame) -> None:
         fig16.update_layout(**PLOTLY_BASE, showlegend=False)
         fig16.update_xaxes(tickangle=-30)
         fig16.update_yaxes(tickformat=".1%")
-        st.plotly_chart(fig16, use_container_width=True)
+        st.plotly_chart(fig16, width='stretch')
 
     col_c, col_d = st.columns(2)
 
@@ -74,7 +74,7 @@ def render(fdf: pd.DataFrame) -> None:
             annotation_font_color="#e63946",
         )
         fig17.update_layout(**PLOTLY_BASE)
-        st.plotly_chart(fig17, use_container_width=True)
+        st.plotly_chart(fig17, width='stretch')
 
     with col_d:
         st.subheader("Volatilidade: Pré vs Pós Incidente")
@@ -101,5 +101,5 @@ def render(fdf: pd.DataFrame) -> None:
             showlegend=False,
         ))
         fig18.update_layout(**PLOTLY_BASE)
-        st.plotly_chart(fig18, use_container_width=True)
+        st.plotly_chart(fig18, width='stretch')
         

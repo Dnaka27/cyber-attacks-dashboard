@@ -20,7 +20,7 @@ def render(fdf: pd.DataFrame) -> None:
         )
 
         st.markdown(f"**{len(display_df):,} registros** com os filtros atuais")
-        st.dataframe(display_df, use_container_width=True, height=350)
+        st.dataframe(display_df, width='stretch', height=350)
 
         csv_bytes = display_df.to_csv(index=False).encode()
         st.download_button(

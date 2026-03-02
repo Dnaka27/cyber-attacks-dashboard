@@ -31,17 +31,6 @@ def render(fdf: pd.DataFrame) -> None:
             .tolist()
         )
 
-        PALETTE_8 = [
-            "#1e2235",
-            "#264653",
-            "#457b9d",
-            "#2a9d8f",
-            "#a8dadc",
-            "#e9c46a",
-            "#f4a261",
-            "#e63946",
-        ]
-
         chart1 = (
             alt.Chart(year_atk)
             .mark_area(opacity=0.85)
@@ -52,7 +41,7 @@ def render(fdf: pd.DataFrame) -> None:
                     "attack_vector_primary:N",
                     scale=alt.Scale(
                         domain=categorias,
-                        range=PALETTE_8[:len(categorias)],
+                        scheme="category20",
                     ),
                     title="Ataque",
                 ),
@@ -64,7 +53,7 @@ def render(fdf: pd.DataFrame) -> None:
             )
         )
 
-        st.altair_chart(chart1, use_container_width=True)
+        st.altair_chart(chart1, width='stretch')
 
     with col_b:
         st.subheader("Perda Total por Ano (USD)")
@@ -105,7 +94,7 @@ def render(fdf: pd.DataFrame) -> None:
 
         chart = line + points + labels
 
-        st.altair_chart(chart, use_container_width=True)
+        st.altair_chart(chart, width='stretch')
 
     col_c, col_d = st.columns(2)
 
@@ -130,7 +119,7 @@ def render(fdf: pd.DataFrame) -> None:
                 "tipo:N",
                 scale=alt.Scale(
                     domain=["Pública", "Privada"],
-                    range=["#457b9d", "#f4a261"],
+                    scheme="category20",
                 ),
                 title="Tipo",
             ),
@@ -141,12 +130,13 @@ def render(fdf: pd.DataFrame) -> None:
         labels = base.mark_text(
             dy=-6,
             size=12,
+            fontWeight="bold",
             color="white"
         ).encode(
             text="count:Q"
         )
 
-        st.altair_chart(bars + labels, use_container_width=True)
+        st.altair_chart(bars + labels, width='stretch')
 
     with col_d:
         st.subheader("Quality Grade dos Dados por Ano")
@@ -165,7 +155,7 @@ def render(fdf: pd.DataFrame) -> None:
                 "quality_grade:N",
                 scale=alt.Scale(
                     domain=["Gold", "Silver", "Bronze"],
-                    range=["#e9c46a", "#a8dadc", "#f4a261"],
+                    scheme="category20",
                 ),
                 title="Grade",
             ),
@@ -180,4 +170,4 @@ def render(fdf: pd.DataFrame) -> None:
             text="count:Q"
         )
 
-        st.altair_chart(bars + labels, use_container_width=True)
+        st.altair_chart(bars + labels, width='stretch')

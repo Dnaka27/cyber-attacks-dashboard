@@ -33,13 +33,52 @@ def render(fdf: pd.DataFrame) -> None:
                 y=alt.Y("attack:N", sort="-x", title="Vetor"),
                 color=alt.Color(
                     "attack:N",
-                    scale=alt.Scale(range=PALETTE),
+                    scale=alt.Scale(scheme="category10"),
                     legend=None,
                 ),
             )
         )
 
-        st.altair_chart(chart1, use_container_width=True)
+        labels = (
+            alt.Chart(atk_counts)
+            .mark_text(
+                align="left",
+                baseline="middle",
+                dx=3,
+                size=12,
+            )
+            .encode(
+                x="count:Q",
+                y=alt.Y("attack:N", sort="-x"),
+                text="count:Q",
+            )
+        )
+
+        st.altair_chart(chart1 + labels, width="stretch")
+
+        downtime_avg = (
+            fdf.dropna(subset=["downtime_hours"])
+            .groupby("attack_vector_primary")["downtime_hours"]
+            .mean()
+            .reset_index()
+        )
+
+        chart3 = (
+            alt.Chart(downtime_avg)
+            .mark_bar()
+            .encode(
+                x=alt.X("attack_vector_primary:N", title="Ataque"),
+                y=alt.Y("downtime_hours:Q", title="Horas"),
+                color=alt.Color(
+                    "attack_vector_primary:N",
+                    scale=alt.Scale(scheme="category10"),
+                    legend=None,
+                ),
+            )
+        )
+
+        st.subheader("Downtime por Vetor de Ataque (horas)")
+        st.altair_chart(chart3, width='stretch')
 
     with col_b:
         st.subheader("Heatmap: Ataque × Setor")
@@ -64,35 +103,36 @@ def render(fdf: pd.DataFrame) -> None:
             )
         )
 
-        st.altair_chart(chart2, use_container_width=True)
+        st.altair_chart(chart2, width='stretch', height="stretch")
 
     col_c, col_d = st.columns(2)
 
     with col_c:
-        st.subheader("Downtime por Vetor de Ataque (horas)")
+        # st.subheader("Downtime por Vetor de Ataque (horas)")
 
-        downtime_avg = (
-            fdf.dropna(subset=["downtime_hours"])
-            .groupby("attack_vector_primary")["downtime_hours"]
-            .mean()
-            .reset_index()
-        )
+        # downtime_avg = (
+        #     fdf.dropna(subset=["downtime_hours"])
+        #     .groupby("attack_vector_primary")["downtime_hours"]
+        #     .mean()
+        #     .reset_index()
+        # )
 
-        chart3 = (
-            alt.Chart(downtime_avg)
-            .mark_bar()
-            .encode(
-                x=alt.X("attack_vector_primary:N", title="Ataque"),
-                y=alt.Y("downtime_hours:Q", title="Horas"),
-                color=alt.Color(
-                    "attack_vector_primary:N",
-                    scale=alt.Scale(range=PALETTE),
-                    legend=None,
-                ),
-            )
-        )
+        # chart3 = (
+        #     alt.Chart(downtime_avg)
+        #     .mark_bar()
+        #     .encode(
+        #         x=alt.X("attack_vector_primary:N", title="Ataque"),
+        #         y=alt.Y("downtime_hours:Q", title="Horas"),
+        #         color=alt.Color(
+        #             "attack_vector_primary:N",
+        #             scale=alt.Scale(range=PALETTE),
+        #             legend=None,
+        #         ),
+        #     )
+        # )
 
-        st.altair_chart(chart3, use_container_width=True)
+        # st.altair_chart(chart3, width='stretch')
+        pass
 
     with col_d:
         st.subheader("Confiança de Atribuição")
@@ -116,7 +156,7 @@ def render(fdf: pd.DataFrame) -> None:
             )
         )
 
-        st.altair_chart(chart4, use_container_width=True)
+        st.altair_chart(chart4, width='stretch')
 
     st.subheader("Registros Comprometidos por Setor")
 
@@ -140,4 +180,4 @@ def render(fdf: pd.DataFrame) -> None:
         )
     )
 
-    st.altair_chart(chart5, use_container_width=True)
+    st.altair_chart(chart5, width='stretch')

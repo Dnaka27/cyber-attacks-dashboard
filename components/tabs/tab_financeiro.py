@@ -20,7 +20,7 @@ def render(fdf: pd.DataFrame) -> None:
         )
         fig10.update_layout(**PLOTLY_BASE)
         fig10.update_xaxes(tickformat="$.2s")
-        st.plotly_chart(fig10, use_container_width=True)
+        st.plotly_chart(fig10, width='stretch')
 
     with col_b:
         st.subheader("Composição das Perdas (mediana USD)")
@@ -38,7 +38,7 @@ def render(fdf: pd.DataFrame) -> None:
             marker_colors=PALETTE[:4],
         ))
         fig11.update_layout(**PLOTLY_BASE)
-        st.plotly_chart(fig11, use_container_width=True)
+        st.plotly_chart(fig11, width='stretch')
 
     col_c, col_d = st.columns(2)
 
@@ -60,7 +60,7 @@ def render(fdf: pd.DataFrame) -> None:
         fig12.update_layout(**PLOTLY_BASE)
         fig12.update_coloraxes(showscale=False)
         fig12.update_xaxes(tickformat="$.2s")
-        st.plotly_chart(fig12, use_container_width=True)
+        st.plotly_chart(fig12, width='stretch')
 
     with col_d:
         st.subheader("Ransom: Demandado vs Pago (USD)")
@@ -87,7 +87,7 @@ def render(fdf: pd.DataFrame) -> None:
             fig13.update_layout(**PLOTLY_BASE)
             fig13.update_xaxes(tickformat="$.2s")
             fig13.update_yaxes(tickformat="$.2s")
-            st.plotly_chart(fig13, use_container_width=True)
+            st.plotly_chart(fig13, width='stretch')
         else:
             st.info("Sem dados de ransom nos filtros atuais.")
 
@@ -108,4 +108,4 @@ def render(fdf: pd.DataFrame) -> None:
     fig14.update_layout(**PLOTLY_BASE)
     fig14.update_coloraxes(showscale=False)
     fig14.update_yaxes(tickformat="$.2s")
-    st.plotly_chart(fig14, use_container_width=True)
+    st.plotly_chart(fig14, width='stretch')
