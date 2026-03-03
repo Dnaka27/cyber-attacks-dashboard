@@ -3,15 +3,6 @@ import streamlit as st
 import altair as alt
 
 
-PALETTE = [
-    "#1e2235",
-    "#457b9d",
-    "#a8dadc",
-    "#f4a261",
-    "#e63946",
-]
-
-
 def render(fdf: pd.DataFrame) -> None:
     col_a, col_b = st.columns(2)
 
@@ -105,36 +96,9 @@ def render(fdf: pd.DataFrame) -> None:
 
         st.altair_chart(chart2, width='stretch', height="stretch")
 
-    col_c, col_d = st.columns(2)
+    col_c, col_d = st.columns([1, 2])
 
     with col_c:
-        # st.subheader("Downtime por Vetor de Ataque (horas)")
-
-        # downtime_avg = (
-        #     fdf.dropna(subset=["downtime_hours"])
-        #     .groupby("attack_vector_primary")["downtime_hours"]
-        #     .mean()
-        #     .reset_index()
-        # )
-
-        # chart3 = (
-        #     alt.Chart(downtime_avg)
-        #     .mark_bar()
-        #     .encode(
-        #         x=alt.X("attack_vector_primary:N", title="Ataque"),
-        #         y=alt.Y("downtime_hours:Q", title="Horas"),
-        #         color=alt.Color(
-        #             "attack_vector_primary:N",
-        #             scale=alt.Scale(range=PALETTE),
-        #             legend=None,
-        #         ),
-        #     )
-        # )
-
-        # st.altair_chart(chart3, width='stretch')
-        pass
-
-    with col_d:
         st.subheader("Confiança de Atribuição")
 
         conf_counts = (
@@ -151,33 +115,34 @@ def render(fdf: pd.DataFrame) -> None:
                 theta="count:Q",
                 color=alt.Color(
                     "confiança:N",
-                    scale=alt.Scale(range=PALETTE),
+                    scale=alt.Scale(scheme="category10"),
                 ),
             )
         )
 
         st.altair_chart(chart4, width='stretch')
 
-    st.subheader("Registros Comprometidos por Setor")
+    with col_d:
+        st.subheader("Registros Comprometidos por Setor")
 
-    sec_rec = (
-        fdf.groupby("industry_name")["data_compromised_records"]
-        .sum()
-        .reset_index()
-    )
-
-    chart5 = (
-        alt.Chart(sec_rec)
-        .mark_bar()
-        .encode(
-            x=alt.X("industry_name:N", sort="-y", title="Setor"),
-            y=alt.Y("data_compromised_records:Q", title="Registros"),
-            color=alt.Color(
-                "data_compromised_records:Q",
-                scale=alt.Scale(range=["#1e2235", "#f4a261", "#e63946"]),
-                legend=None,
-            ),
+        sec_rec = (
+            fdf.groupby("industry_name")["data_compromised_records"]
+            .sum()
+            .reset_index()
         )
-    )
 
-    st.altair_chart(chart5, width='stretch')
+        chart5 = (
+            alt.Chart(sec_rec)
+            .mark_bar()
+            .encode(
+                x=alt.X("industry_name:N", sort="-y", title="Setor"),
+                y=alt.Y("data_compromised_records:Q", title="Registros"),
+                color=alt.Color(
+                    "data_compromised_records:Q",
+                    scale=alt.Scale(range=["#1e2235", "#f4a261", "#e63946"]),
+                    legend=None,
+                ),
+            )
+        )
+
+        st.altair_chart(chart5, width='stretch')

@@ -12,7 +12,6 @@ from components.tabs import (
     tab_raw_data,
 )
 
-# ── Configuração da página ────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Cyber Attacks · Financial & Market Impact",
     page_icon="🛡️",
@@ -20,23 +19,21 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── CSS global ────────────────────────────────────────────────────────────────
 inject_css()
 
-# ── Carregar dados ────────────────────────────────────────────────────────────
+# ── Carregar dados
 try:
     df = load_data()
 except FileNotFoundError as e:
     st.error(
-        f"❌ Arquivo não encontrado: {e}\n\n"
+        f"Arquivo não encontrado: {e}\n\n"
         "Verifique se a pasta `data/` contém os três CSVs."
     )
     st.stop()
 
-# ── Sidebar + filtros → DataFrame filtrado ────────────────────────────────────
 fdf = render_sidebar(df)
 
-# ── Header ────────────────────────────────────────────────────────────────────
+# ── Header
 st.markdown("# Cyber Attacks")
 st.markdown("#### Financial & Market Impact Dashboard")
 st.markdown("---")
@@ -45,11 +42,11 @@ if fdf.empty:
     st.warning("Nenhum dado com os filtros atuais. Ajuste a barra lateral.")
     st.stop()
 
-# ── KPIs ──────────────────────────────────────────────────────────────────────
+# ── KPIs
 render_kpis(fdf)
 st.markdown("---")
 
-# ── Tabs ──────────────────────────────────────────────────────────────────────
+# ── Tabs
 tab1, tab2, tab3, tab4 = st.tabs([
     "Tendências",
     "Ataques",
@@ -69,6 +66,6 @@ with tab3:
 with tab4:
     tab_mercado.render(fdf)
 
-# ── Raw data ──────────────────────────────────────────────────────────────────
+# ── Raw data
 st.divider()
 tab_raw_data.render(fdf)
