@@ -37,6 +37,8 @@ def render(fdf: pd.DataFrame) -> None:
                 baseline="middle",
                 dx=3,
                 size=12,
+                color="white",
+                fontWeight="bold",
             )
             .encode(
                 x="count:Q",
@@ -54,7 +56,7 @@ def render(fdf: pd.DataFrame) -> None:
             .reset_index()
         )
 
-        chart3 = (
+        chart2 = (
             alt.Chart(downtime_avg)
             .mark_bar()
             .encode(
@@ -68,8 +70,24 @@ def render(fdf: pd.DataFrame) -> None:
             )
         )
 
+        labels2 = (
+            alt.Chart(downtime_avg)
+            .mark_text(
+                align="center",
+                dy=-12,
+                size=12,
+                color="white",
+                fontWeight="bold"
+            )
+            .encode(
+                x="attack_vector_primary:N",
+                y=alt.Y("downtime_hours:Q", sort="-x"),
+                text=alt.Text("downtime_hours:Q", format=".2f"),
+            )
+        )
+
         st.subheader("Downtime por Vetor de Ataque (horas)")
-        st.altair_chart(chart3, width='stretch')
+        st.altair_chart(chart2 + labels2, width='stretch')
 
     with col_b:
         st.subheader("Heatmap: Ataque × Setor")
@@ -80,7 +98,7 @@ def render(fdf: pd.DataFrame) -> None:
             .reset_index(name="count")
         )
 
-        chart2 = (
+        chart3 = (
             alt.Chart(heat)
             .mark_rect()
             .encode(
@@ -94,7 +112,7 @@ def render(fdf: pd.DataFrame) -> None:
             )
         )
 
-        st.altair_chart(chart2, width='stretch', height="stretch")
+        st.altair_chart(chart3, width='stretch', height="stretch")
 
     col_c, col_d = st.columns([1, 2])
 
@@ -119,8 +137,21 @@ def render(fdf: pd.DataFrame) -> None:
                 ),
             )
         )
+        labels4 = (
+            alt.Chart(conf_counts)
+            .mark_text(
+                radius=10,  # controla distância do centro
+                size=12,
+                color="white",
+                fontWeight="bold"
+            )
+            .encode(
+                theta="count:Q",
+                text="count:Q",
+            )
+        )
 
-        st.altair_chart(chart4, width='stretch')
+        st.altair_chart(chart4 + labels4, width='stretch')
 
     with col_d:
         st.subheader("Registros Comprometidos por Setor")

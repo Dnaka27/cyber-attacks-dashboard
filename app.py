@@ -1,5 +1,6 @@
 import streamlit as st
 
+from components.header import render_header
 from config.styles import inject_css
 from data_loader.loader import load_data
 from components.sidebar import render_sidebar
@@ -32,21 +33,12 @@ except FileNotFoundError as e:
     st.stop()
 
 fdf = render_sidebar(df)
-
-# ── Header
-st.markdown("# Cyber Attacks")
-st.markdown("#### Financial & Market Impact Dashboard")
-st.markdown("---")
-
-if fdf.empty:
-    st.warning("Nenhum dado com os filtros atuais. Ajuste a barra lateral.")
-    st.stop()
-
-# ── KPIs
+fdf = render_header(fdf)
 render_kpis(fdf)
 st.markdown("---")
 
-# ── Tabs
+# Tabs
+
 tab1, tab2, tab3, tab4 = st.tabs([
     "Tendências",
     "Ataques",
