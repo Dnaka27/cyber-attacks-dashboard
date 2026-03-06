@@ -126,32 +126,36 @@ def render(fdf: pd.DataFrame) -> None:
         )
         conf_counts.columns = ["confiança", "count"]
 
+        total = conf_counts["count"].sum()
+
         chart4 = (
             alt.Chart(conf_counts)
-            .mark_arc(innerRadius=50)
+            .mark_arc(innerRadius=60, outerRadius=120)
             .encode(
                 theta="count:Q",
                 color=alt.Color(
                     "confiança:N",
                     scale=alt.Scale(scheme="category10"),
-                ),
-            )
-        )
-        labels4 = (
-            alt.Chart(conf_counts)
-            .mark_text(
-                radius=10,  # controla distância do centro
-                size=12,
-                color="white",
-                fontWeight="bold"
-            )
-            .encode(
-                theta="count:Q",
-                text="count:Q",
+                )
             )
         )
 
-        st.altair_chart(chart4 + labels4, width='stretch')
+        center_text = (
+            alt.Chart({"values": [{"x": 0, "y": 0, "total": total}]})
+            .mark_text(
+                size=24,
+                color="white",
+                fontWeight="bold",
+                align="center"
+            )
+            .encode(
+                x=alt.value(0),
+                y=alt.value(0),
+                text=alt.Text("total:Q")
+            )
+        )
+
+        st.altair_chart(chart4 + center_text, width="stretch")
 
     with col_d:
         st.subheader("Registros Comprometidos por Setor")
