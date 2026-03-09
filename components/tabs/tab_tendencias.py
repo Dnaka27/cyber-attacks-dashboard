@@ -3,15 +3,6 @@ import streamlit as st
 import altair as alt
 
 
-PALETTE = [
-    "#1e2235",
-    "#457b9d",
-    "#a8dadc",
-    "#f4a261",
-    "#e63946",
-]
-
-
 def render(fdf: pd.DataFrame) -> None:
     col_a, col_b = st.columns(2)
 

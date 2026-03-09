@@ -2,9 +2,9 @@ import streamlit as st
 
 
 def render_header(fdf) -> None:
-    st.markdown("# Cyber Attacks")
-    st.markdown("#### Financial & Market Impact Dashboard")
-    st.markdown("---")
+    st.title(":red[Cyber Attacks]")
+    st.subheader("Financial & Market Impact Dashboard")
+    st.divider()
 
     if fdf.empty:
         st.warning("Nenhum dado com os filtros atuais. Ajuste a barra lateral.")
