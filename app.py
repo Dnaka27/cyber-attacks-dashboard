@@ -39,11 +39,11 @@ st.markdown("---")
 
 # Tabs
 
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2 = st.tabs([
     "Tendências",
-    "Ataques",
-    "Impacto Financeiro",
-    "Impacto de Mercado",
+    "Ataques"
+    # "Impacto Financeiro",
+    # "Impacto de Mercado",
 ])
 
 with tab1:
@@ -52,11 +52,13 @@ with tab1:
 with tab2:
     tab_ataques.render(fdf)
 
-with tab3:
-    tab_financeiro.render(fdf)
+# with tab3:
+#     # tab_financeiro.render(fdf)
+#     pass
 
-with tab4:
-    tab_mercado.render(fdf)
+# with tab4:
+#     # tab_mercado.render(fdf)
+#     pass
 
 # ── Raw data
 st.divider()
