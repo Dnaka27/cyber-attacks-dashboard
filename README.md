@@ -1,41 +1,42 @@
 # Cyber Attacks — Financial & Market Impact Dashboard
 
-Interactive Streamlit dashboard for the [Kaggle Cyber Attacks dataset](https://www.kaggle.com/datasets/aryanmdev/cyber-attacks-financial-and-market-impact/data).
+Interactive web dashboard for the [Kaggle Cyber Attacks dataset](https://www.kaggle.com/datasets/aryanmdev/cyber-attacks-financial-and-market-impact/data).
 
 ---
 
 ## Technologies
 
-![Python](https://img.shields.io/badge/Python-1F2194?style=for-the-badge&logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Plotly](https://img.shields.io/badge/Plotly-5B00E8?style=for-the-badge&logo=plotly&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 ---
 
 ## About
 
-Visualizes financial and market impact data from cyber attacks across four tabs. Sidebar filters allow scoping by year range, sector, attack type, severity, and minimum financial loss.
+Visualizes financial and market impact data from cyber attacks across a compact, high-level set of tabs. A persistent sidebar holds the title and filters (year range, country, sector, attack vector, quality grade, and public/private companies).
 
 | Tab | Content |
 |---|---|
-| Trends | Cumulative incidents by year, financial loss over time, severity distribution |
-| Attack Analysis | Ranking by attack type, sector x attack heatmap, recovery boxplot |
-| Financial Impact | Loss histogram, ransom payment rate, market cap vs stock drop, correlation matrix |
-| Geographic | World choropleth, loss by country, attacks by country |
+| Panorama | Financial loss over time, attack vector ranking |
+| Impacto Financeiro | Loss composition, median loss by sector |
+| Impacto de Mercado | Abnormal stock return by vector, price recovery time |
+| Docket | Raw filtered incident data, CSV export |
+
+Data is 100% static: the dataset is pre-processed once (from the original pandas pipeline) into `src/data/data.json`, and all filtering/aggregation runs client-side. No backend, no database.
 
 ---
 
 ## Installation
 
 ```bash
-pip install -r requirements.txt
+npm install
+npm run dev
 ```
 
-Download `cyber_attacks.csv` from [Kaggle](https://www.kaggle.com/datasets/aryanmdev/cyber-attacks-financial-and-market-impact/data) and place it in the same folder as `app.py`.
-
 ```bash
-streamlit run app.py
+npm run build    # production build to dist/
 ```
 
 ---
