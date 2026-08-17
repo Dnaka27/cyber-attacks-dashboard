@@ -126,34 +126,39 @@ button {
 /* thin themed scrollbar, reused by every internally-scrolling panel */
 .sidebar,
 .main,
-.docket-table-wrap {
+.docket-table-wrap,
+.tab-bar-track {
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
 }
 
 .sidebar::-webkit-scrollbar,
 .main::-webkit-scrollbar,
-.docket-table-wrap::-webkit-scrollbar {
+.docket-table-wrap::-webkit-scrollbar,
+.tab-bar-track::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 .sidebar::-webkit-scrollbar-track,
 .main::-webkit-scrollbar-track,
-.docket-table-wrap::-webkit-scrollbar-track {
+.docket-table-wrap::-webkit-scrollbar-track,
+.tab-bar-track::-webkit-scrollbar-track {
   background: transparent;
 }
 
 .sidebar::-webkit-scrollbar-thumb,
 .main::-webkit-scrollbar-thumb,
-.docket-table-wrap::-webkit-scrollbar-thumb {
+.docket-table-wrap::-webkit-scrollbar-thumb,
+.tab-bar-track::-webkit-scrollbar-thumb {
   background: var(--line);
   border-radius: 3px;
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover,
 .main::-webkit-scrollbar-thumb:hover,
-.docket-table-wrap::-webkit-scrollbar-thumb:hover {
+.docket-table-wrap::-webkit-scrollbar-thumb:hover,
+.tab-bar-track::-webkit-scrollbar-thumb:hover {
   background: var(--muted);
 }
 
@@ -189,6 +194,21 @@ button {
     height: auto;
     padding: 24px 16px 48px;
     overflow-y: visible;
+  }
+  .filter-panel {
+    left: 0;
+    right: 0;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .tab-bar-track {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 4px;
+  }
+  .tab-button {
+    flex: 0 0 auto;
   }
 }
 
@@ -264,10 +284,14 @@ button {
 }
 
 .filter-chip-value {
+  display: block;
+  width: 100%;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.85rem;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .filter-panel {
@@ -465,7 +489,7 @@ button {
 
 .kpi-band {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
 }
 
@@ -806,5 +830,11 @@ button {
 @media (max-width: 640px) {
   .main {
     padding: 20px 16px 40px;
+  }
+}
+
+@media (max-width: 380px) {
+  .kpi-card--hero {
+    grid-column: span 1;
   }
 }
