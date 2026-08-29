@@ -4,7 +4,7 @@ export default function YearRangeSlider({ min, max, value, onChange }) {
 
   return (
     <div className="year-filter">
-      <span className="year-filter-label">Período</span>
+      <span className="year-filter-label">Period</span>
       <span className="year-filter-value">
         {lo} — {hi}
       </span>

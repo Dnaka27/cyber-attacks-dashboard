@@ -24,8 +24,8 @@ export default function AttackVectorBarH({ fdf }) {
     <PlotlyChart
       data={data}
       layout={{
-        xaxis: { title: { text: "Incidentes" } },
-        yaxis: { title: { text: "Vetor" }, automargin: true },
+        xaxis: { title: { text: "Incidents" } },
+        yaxis: { title: { text: "Vector" }, automargin: true },
       }}
     />
   );

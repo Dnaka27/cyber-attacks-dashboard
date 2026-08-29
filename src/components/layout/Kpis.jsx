@@ -11,17 +11,17 @@ export default function Kpis({ fdf }) {
   const incidentCount = useCountUp(fdf.length);
 
   const rows = [
-    { label: "Incidentes registrados", value: compactNumber(incidentCount) },
-    { label: "Perda mediana por incidente", value: compactUSD(medianLoss) },
-    { label: "Registros comprometidos", value: compactNumber(recordsLeaked) },
-    { label: "Retorno anormal médio (1d)", value: percent(abnormalReturn) },
-    { label: "Recuperação mediana do preço", value: days(recoveryDays) },
+    { label: "Incidents recorded", value: compactNumber(incidentCount) },
+    { label: "Median loss per incident", value: compactUSD(medianLoss) },
+    { label: "Records compromised", value: compactNumber(recordsLeaked) },
+    { label: "Mean abnormal return (1d)", value: percent(abnormalReturn) },
+    { label: "Median price recovery", value: days(recoveryDays) },
   ];
 
   return (
     <div className="kpi-band">
       <div className="kpi-card kpi-card--hero">
-        <span className="kpi-card-label">Perda financeira total apurada</span>
+        <span className="kpi-card-label">Total financial loss recorded</span>
         <div className="kpi-card-value kpi-card-value--hero num">{compactUSD(totalLoss)}</div>
       </div>
       {rows.map((row) => (

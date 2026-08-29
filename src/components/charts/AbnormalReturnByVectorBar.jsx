@@ -2,9 +2,9 @@ import PlotlyChart from "../PlotlyChart";
 import { mean } from "../../lib/aggregations";
 
 const WINDOWS = [
-  { label: "1 dia", key: "abnormal_return_1d" },
-  { label: "7 dias", key: "abnormal_return_7d" },
-  { label: "30 dias", key: "abnormal_return_30d" },
+  { label: "1 day", key: "abnormal_return_1d" },
+  { label: "7 days", key: "abnormal_return_7d" },
+  { label: "30 days", key: "abnormal_return_30d" },
 ];
 
 export default function AbnormalReturnByVectorBar({ fdf }) {
@@ -24,8 +24,8 @@ export default function AbnormalReturnByVectorBar({ fdf }) {
       data={data}
       layout={{
         barmode: "group",
-        xaxis: { title: { text: "Vetor" }, tickangle: -30, automargin: true },
-        yaxis: { title: { text: "Retorno" }, tickformat: ".1%" },
+        xaxis: { title: { text: "Vector" }, tickangle: -30, automargin: true },
+        yaxis: { title: { text: "Return" }, tickformat: ".1%" },
       }}
     />
   );

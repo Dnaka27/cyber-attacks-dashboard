@@ -7,8 +7,8 @@ export default function Masthead() {
         Loss Ledger
       </h1>
       <p className="masthead-sub">
-        Impacto financeiro e de mercado de incidentes de cibersegurança — perdas diretas,
-        resgates e reação do mercado acionário, por setor, país e vetor de ataque.
+        Financial and market impact of cybersecurity incidents — direct losses,
+        ransoms, and stock market reaction, by sector, country, and attack vector.
       </p>
     </header>
   );

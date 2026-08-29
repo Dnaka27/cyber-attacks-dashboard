@@ -21,8 +21,8 @@ export default function RecoveryDaysHistogram({ fdf }) {
       data={data}
       layout={{
         barmode: "overlay",
-        xaxis: { title: { text: "Dias" } },
-        yaxis: { title: { text: "Incidentes" } },
+        xaxis: { title: { text: "Days" } },
+        yaxis: { title: { text: "Incidents" } },
         shapes: [
           {
             type: "line",
@@ -39,7 +39,7 @@ export default function RecoveryDaysHistogram({ fdf }) {
             x: med,
             y: 1,
             yref: "paper",
-            text: `Mediana: ${med.toFixed(0)}d`,
+            text: `Median: ${med.toFixed(0)}d`,
             showarrow: false,
             font: { color: "#e2483f" },
             yshift: 10,

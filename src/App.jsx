@@ -19,15 +19,15 @@ function App() {
       </aside>
       <div className="main">
         {fdf.length === 0 ? (
-          <p className="empty-state">Nenhum incidente com os filtros atuais. Ajuste os filtros ao lado.</p>
+          <p className="empty-state">No incidents match the current filters. Adjust the filters in the sidebar.</p>
         ) : (
           <>
             <Kpis fdf={fdf} />
             <Tabs
               tabs={[
                 { label: "I. Panorama", content: <PanoramaTab fdf={fdf} /> },
-                { label: "II. Impacto financeiro", content: <FinancialTab fdf={fdf} /> },
-                { label: "III. Impacto de mercado", content: <MarketTab fdf={fdf} /> },
+                { label: "II. Financial Impact", content: <FinancialTab fdf={fdf} /> },
+                { label: "III. Market Impact", content: <MarketTab fdf={fdf} /> },
                 { label: "Docket", content: <RawDataTable fdf={fdf} /> },
               ]}
             />
@@ -35,8 +35,8 @@ function App() {
         )}
 
         <footer className="report-footer">
-          Fonte: Kaggle — Cyber Attacks Financial &amp; Market Impact Dataset. Dados estáticos,
-          processados uma única vez.
+          Source: Kaggle — Cyber Attacks Financial &amp; Market Impact Dataset. Static data,
+          processed once.
         </footer>
       </div>
     </div>

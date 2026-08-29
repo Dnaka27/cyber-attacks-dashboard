@@ -33,7 +33,7 @@ export default function FilterBar() {
       <YearRangeSlider min={YEAR_MIN} max={YEAR_MAX} value={yearRange} onChange={setYearRange} />
 
       <FilterDropdown
-        label="Vetor de ataque"
+        label="Attack vector"
         value={summarizeSelection(attackVectors, ALL_ATTACK_VECTORS.length)}
       >
         <OptionList
@@ -43,7 +43,7 @@ export default function FilterBar() {
         />
       </FilterDropdown>
 
-      <FilterDropdown label="Setor" value={summarizeSelection(sectors, ALL_SECTORS.length)}>
+      <FilterDropdown label="Sector" value={summarizeSelection(sectors, ALL_SECTORS.length)}>
         <OptionList options={ALL_SECTORS} selected={sectors} onChange={setSectors} />
       </FilterDropdown>
 
@@ -58,7 +58,7 @@ export default function FilterBar() {
         />
       </FilterDropdown>
 
-      <FilterDropdown label="País-sede" value={summarizeSelection(countries, ALL_COUNTRIES.length)}>
+      <FilterDropdown label="HQ country" value={summarizeSelection(countries, ALL_COUNTRIES.length)}>
         <OptionList options={ALL_COUNTRIES} selected={countries} onChange={setCountries} />
       </FilterDropdown>
 
@@ -68,7 +68,7 @@ export default function FilterBar() {
           checked={publicOnly}
           onChange={(e) => setPublicOnly(e.target.checked)}
         />
-        Capital aberto
+        Public company
       </label>
     </div>
   );

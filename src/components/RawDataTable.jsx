@@ -21,7 +21,7 @@ const PAGE_SIZE = 50;
 
 function formatCell(column, value) {
   if (value === null || value === undefined) return "—";
-  if (typeof value === "boolean") return value ? "Sim" : "Não";
+  if (typeof value === "boolean") return value ? "Yes" : "No";
   if (typeof value === "number") {
     return column === "year" ? String(value) : value.toLocaleString("en-US");
   }
@@ -45,10 +45,10 @@ export default function RawDataTable({ fdf }) {
     <div className="docket-body">
       <div className="docket-toolbar">
         <span className="docket-count">
-          {sorted.length.toLocaleString("en-US")} registros com os filtros atuais
+          {sorted.length.toLocaleString("en-US")} records match the current filters
         </span>
         <button type="button" onClick={handleDownload} className="docket-download">
-          Baixar CSV
+          Download CSV
         </button>
       </div>
 
@@ -75,13 +75,13 @@ export default function RawDataTable({ fdf }) {
 
       <div className="docket-pagination">
         <button type="button" disabled={page === 0} onClick={() => setPage((p) => p - 1)}>
-          Anterior
+          Previous
         </button>
         <span className="muted-note">
-          Página {page + 1} de {pageCount}
+          Page {page + 1} of {pageCount}
         </span>
         <button type="button" disabled={page >= pageCount - 1} onClick={() => setPage((p) => p + 1)}>
-          Próxima
+          Next
         </button>
       </div>
     </div>

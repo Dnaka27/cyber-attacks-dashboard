@@ -11,7 +11,7 @@ function easeOutCubic(t) {
   return 1 - Math.pow(1 - t, 3);
 }
 
-/** Anima um numero do valor anterior ate `target` (usado nos KPIs do topo do relatorio). */
+/** Animates a number from the previous value to `target` (used in the report's top KPIs). */
 export function useCountUp(target, duration = 700) {
   const [value, setValue] = useState(target);
   const fromRef = useRef(target);

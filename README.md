@@ -20,8 +20,8 @@ Visualizes financial and market impact data from cyber attacks across a compact,
 | Tab | Content |
 |---|---|
 | Panorama | Financial loss over time, attack vector ranking |
-| Impacto Financeiro | Loss composition, median loss by sector |
-| Impacto de Mercado | Abnormal stock return by vector, price recovery time |
+| Financial Impact | Loss composition, median loss by sector |
+| Market Impact | Abnormal stock return by vector, price recovery time |
 | Docket | Raw filtered incident data, CSV export |
 
 Data is 100% static: the dataset is pre-processed once (from the original pandas pipeline) into `src/data/data.json`, and all filtering/aggregation runs client-side. No backend, no database.

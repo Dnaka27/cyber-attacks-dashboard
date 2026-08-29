@@ -1,4 +1,4 @@
-/** Funcoes puras de agregacao, equivalentes aos groupby/agg do pandas usados no app original. */
+/** Pure aggregation functions, equivalent to the pandas groupby/agg used in the original app. */
 
 export function notNull(values) {
   return values.filter((v) => v !== null && v !== undefined);
@@ -32,7 +32,7 @@ export function groupBy(rows, keyFn) {
   return map;
 }
 
-/** value_counts equivalente: conta ocorrencias de keyFn(row), ignorando null/undefined. */
+/** value_counts equivalent: counts occurrences of keyFn(row), ignoring null/undefined. */
 export function valueCounts(rows, keyFn) {
   const counts = new Map();
   for (const row of rows) {

@@ -1,7 +1,7 @@
 /**
- * Lista de checkboxes usada dentro de um FilterDropdown. Selecao vazia = "todos"
- * (ver lib/useFilteredData.js), entao tratamos como "todos marcados" quando
- * `selected` esta vazio.
+ * Checkbox list used inside a FilterDropdown. Empty selection = "all"
+ * (see lib/useFilteredData.js), so we treat it as "all checked" when
+ * `selected` is empty.
  */
 export default function OptionList({ options, selected, onChange }) {
   const allSelected = selected.length === 0;
@@ -17,9 +17,9 @@ export default function OptionList({ options, selected, onChange }) {
   return (
     <div>
       <div className="filter-panel-actions">
-        <span className="muted-note">{allSelected ? "Todos" : `${selected.length} de ${options.length}`}</span>
+        <span className="muted-note">{allSelected ? "All" : `${selected.length} of ${options.length}`}</span>
         <button type="button" className="filter-panel-action" onClick={() => onChange([])}>
-          Redefinir
+          Reset
         </button>
       </div>
       <div className="option-list">

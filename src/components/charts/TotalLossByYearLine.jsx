@@ -25,7 +25,7 @@ export default function TotalLossByYearLine({ fdf }) {
     <PlotlyChart
       data={data}
       layout={{
-        xaxis: { title: { text: "Ano" }, type: "category" },
+        xaxis: { title: { text: "Year" }, type: "category" },
         yaxis: { title: { text: "Total Loss (USD)" }, tickformat: "$.2s" },
       }}
     />

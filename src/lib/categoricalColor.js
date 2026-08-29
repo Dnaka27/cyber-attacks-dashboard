@@ -1,11 +1,11 @@
 /**
- * Cores fixas por identidade de categoria (nao por posicao/rank apos filtro),
- * validadas contra CVD e contraste na superficie escura do relatorio (#171d29)
- * via dataviz skill's validate_palette.js. Ver lib/plotlyTheme.js para o PALETTE base.
+ * Fixed colors by category identity (not by position/rank after filtering),
+ * validated against CVD and contrast on the report's dark surface (#171d29)
+ * via the dataviz skill's validate_palette.js. See lib/plotlyTheme.js for the base PALETTE.
  */
 
-// Ordenado por frequencia global no dataset (Ransomware > Phishing > ... > Backdoor).
-// Os 8 mais frequentes recebem um slot categorico validado; o 9o (Backdoor) cai em "Other".
+// Ordered by global frequency in the dataset (Ransomware > Phishing > ... > Backdoor).
+// The top 8 get a validated categorical slot; the 9th (Backdoor) falls into "Other".
 const ATTACK_VECTOR_COLORS = {
   Ransomware: "#3987e5",
   Phishing: "#d95926",

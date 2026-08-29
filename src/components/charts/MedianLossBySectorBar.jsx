@@ -32,8 +32,8 @@ export default function MedianLossBySectorBar({ fdf }) {
     <PlotlyChart
       data={data}
       layout={{
-        xaxis: { title: { text: "Perda Mediana (USD)" }, tickformat: "$.2s" },
-        yaxis: { title: { text: "Setor" }, automargin: true },
+        xaxis: { title: { text: "Median Loss (USD)" }, tickformat: "$.2s" },
+        yaxis: { title: { text: "Sector" }, automargin: true },
       }}
     />
   );

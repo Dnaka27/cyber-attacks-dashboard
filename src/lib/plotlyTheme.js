@@ -1,7 +1,7 @@
-// Paleta categorica validada (CVD + contraste) contra a superficie escura do
-// relatorio (#171d29) via dataviz skill's validate_palette.js. Ordem fixa —
-// nunca ciclar por indice apos filtro; ver lib/categoricalColor.js para o
-// mapeamento por identidade de entidade (vetor de ataque, quality grade etc).
+// Categorical palette validated (CVD + contrast) against the report's dark
+// surface (#171d29) via the dataviz skill's validate_palette.js. Fixed order —
+// never cycle by index after filtering; see lib/categoricalColor.js for the
+// mapping by entity identity (attack vector, quality grade, etc).
 export const PALETTE = [
   "#3987e5",
   "#d95926",
@@ -35,7 +35,7 @@ export const BASE_CONFIG = {
   responsive: true,
 };
 
-/** Merge raso: layout do chamador tem prioridade, exceto xaxis/yaxis que sao mesclados com o base. */
+/** Shallow merge: caller's layout takes priority, except xaxis/yaxis which are merged with the base. */
 export function mergeLayout(layout) {
   return {
     ...BASE_LAYOUT,

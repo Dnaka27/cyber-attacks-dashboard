@@ -18,8 +18,8 @@ export const ALL_QUALITY_GRADES = ["Gold", "Silver", "Bronze"];
 export const ALL_COUNTRIES = [...new Set(ALL.map((r) => r.country_name))].sort();
 
 /**
- * Hook central de filtragem, equivalente a sidebar.py + header.py combinados.
- * Arrays vazios em attackVectors/sectors/qualityGrades/countries = "todos selecionados".
+ * Central filtering hook, equivalent to sidebar.py + header.py combined.
+ * Empty arrays in attackVectors/sectors/qualityGrades/countries = "all selected".
  */
 export function useFilteredData() {
   const { attackVectors, sectors, qualityGrades, publicOnly, yearRange, countries } =

@@ -23,11 +23,11 @@ export function percent(value, digits = 2) {
 }
 
 export function days(value) {
-  return `${Math.round(value)} dias`;
+  return `${Math.round(value)} days`;
 }
 
 export function summarizeSelection(selected, total) {
-  if (selected.length === 0) return `Todos (${total})`;
+  if (selected.length === 0) return `All (${total})`;
   if (selected.length === 1) return selected[0];
-  return `${selected.length} de ${total}`;
+  return `${selected.length} of ${total}`;
 }
