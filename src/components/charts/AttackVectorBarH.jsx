@@ -1,32 +1,17 @@
-import PlotlyChart from "../PlotlyChart";
-import { valueCounts, sortAsc } from "../../lib/aggregations";
+import { useMemo } from "react";
+import HBarChart from "./HBarChart";
+import { valueCounts, sortDesc } from "../../lib/aggregations";
 import { attackVectorColor } from "../../lib/categoricalColor";
 
 export default function AttackVectorBarH({ fdf }) {
-  const counts = sortAsc(
-    valueCounts(fdf, (r) => r.attack_vector_primary),
-    (r) => r.count,
+  const rows = useMemo(
+    () =>
+      sortDesc(
+        valueCounts(fdf, (r) => r.attack_vector_primary),
+        (r) => r.count,
+      ).map((c) => ({ key: c.key, value: c.count, color: attackVectorColor(c.key) })),
+    [fdf],
   );
 
-  const data = [
-    {
-      x: counts.map((c) => c.count),
-      y: counts.map((c) => c.key),
-      type: "bar",
-      orientation: "h",
-      text: counts.map((c) => String(c.count)),
-      textposition: "outside",
-      marker: { color: counts.map((c) => attackVectorColor(c.key)) },
-    },
-  ];
-
-  return (
-    <PlotlyChart
-      data={data}
-      layout={{
-        xaxis: { title: { text: "Incidents" } },
-        yaxis: { title: { text: "Vector" }, automargin: true },
-      }}
-    />
-  );
+  return <HBarChart rows={rows} label="Incidents by attack vector" labelWidth={104} />;
 }

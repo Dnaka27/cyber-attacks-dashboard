@@ -4,7 +4,7 @@ import rawData from "../data/data.json";
 export const DEFAULT_COUNTRIES = ["Brazil", "United States", "United Kingdom"];
 
 const years = rawData.map((r) => r.year);
-const DEFAULT_YEAR_RANGE = [Math.min(...years), Math.max(...years)];
+export const DEFAULT_YEAR_RANGE = [Math.min(...years), Math.max(...years)];
 
 const FilterContext = createContext(null);
 
@@ -15,6 +15,15 @@ export function FilterProvider({ children }) {
   const [publicOnly, setPublicOnly] = useState(false);
   const [yearRange, setYearRange] = useState(DEFAULT_YEAR_RANGE);
   const [countries, setCountries] = useState(DEFAULT_COUNTRIES);
+
+  function reset() {
+    setAttackVectors([]);
+    setSectors([]);
+    setQualityGrades([]);
+    setPublicOnly(false);
+    setYearRange(DEFAULT_YEAR_RANGE);
+    setCountries(DEFAULT_COUNTRIES);
+  }
 
   const value = {
     attackVectors,
@@ -29,6 +38,7 @@ export function FilterProvider({ children }) {
     setPublicOnly,
     setYearRange,
     setCountries,
+    reset,
   };
 
   return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>;

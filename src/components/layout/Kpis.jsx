@@ -1,8 +1,10 @@
+import TiltCard from "../TiltCard";
 import { sum, median, mean } from "../../lib/aggregations";
 import { compactUSD, compactNumber, percent, days } from "../../lib/format";
 import { useCountUp } from "../../lib/useCountUp";
 
-export default function Kpis({ fdf }) {
+/** `scope` = name of the spotlighted country (KPIs then describe only that country). */
+export default function Kpis({ fdf, scope, onClear }) {
   const totalLoss = useCountUp(sum(fdf.map((r) => r.total_loss_usd)));
   const medianLoss = useCountUp(median(fdf.map((r) => r.total_loss_usd)));
   const recordsLeaked = useCountUp(sum(fdf.map((r) => r.data_compromised_records)));
@@ -19,16 +21,22 @@ export default function Kpis({ fdf }) {
   ];
 
   return (
-    <div className="kpi-band">
-      <div className="kpi-card kpi-card--hero">
+    <div className={`kpi-band${scope ? " kpi-band--focus" : ""}`} key={scope ?? "all"}>
+      <TiltCard className="kpi-card kpi-card--hero">
+        {scope && (
+          <button type="button" className="kpi-scope" onClick={onClear} aria-label={`Clear ${scope}`}>
+            {scope}
+            <span aria-hidden="true">&times;</span>
+          </button>
+        )}
         <span className="kpi-card-label">Total financial loss recorded</span>
         <div className="kpi-card-value kpi-card-value--hero num">{compactUSD(totalLoss)}</div>
-      </div>
+      </TiltCard>
       {rows.map((row) => (
-        <div className="kpi-card" key={row.label}>
+        <TiltCard className="kpi-card" key={row.label}>
           <span className="kpi-card-label">{row.label}</span>
           <div className="kpi-card-value num">{row.value}</div>
-        </div>
+        </TiltCard>
       ))}
     </div>
   );

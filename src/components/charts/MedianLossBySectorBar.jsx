@@ -1,40 +1,27 @@
-import PlotlyChart from "../PlotlyChart";
-import { groupBy, median, sortAsc } from "../../lib/aggregations";
+import { useMemo } from "react";
+import { scaleLinear } from "d3-scale";
+import HBarChart from "./HBarChart";
+import { groupBy, median, sortDesc } from "../../lib/aggregations";
+import { compactUSD } from "../../lib/format";
+
+// Sequential single-hue ramp (dim indigo -> bright violet).
+const ramp = scaleLinear().domain([0, 1]).range(["#3a3f8f", "#a99dff"]);
 
 export default function MedianLossBySectorBar({ fdf }) {
-  const byIndustry = groupBy(fdf, (r) => r.industry_name);
-  const rows = sortAsc(
-    [...byIndustry.entries()].map(([industry, rs]) => ({
-      industry,
-      value: median(rs.map((r) => r.total_loss_usd)),
-    })),
-    (r) => r.value,
-  );
-
-  const data = [
-    {
-      x: rows.map((r) => r.value),
-      y: rows.map((r) => r.industry),
-      type: "bar",
-      orientation: "h",
-      marker: {
-        color: rows.map((r) => r.value),
-        colorscale: [
-          [0, "#2a3242"],
-          [0.5, "#4a7ec2"],
-          [1, "#e2483f"],
-        ],
-      },
-    },
-  ];
+  const rows = useMemo(() => {
+    const items = sortDesc(
+      [...groupBy(fdf, (r) => r.industry_name).entries()].map(([key, rs]) => ({
+        key,
+        value: median(rs.map((r) => r.total_loss_usd)),
+      })),
+      (r) => r.value,
+    );
+    const lo = Math.min(...items.map((r) => r.value));
+    const hi = Math.max(...items.map((r) => r.value));
+    return items.map((r) => ({ ...r, color: ramp(hi === lo ? 1 : (r.value - lo) / (hi - lo)) }));
+  }, [fdf]);
 
   return (
-    <PlotlyChart
-      data={data}
-      layout={{
-        xaxis: { title: { text: "Median Loss (USD)" }, tickformat: "$.2s" },
-        yaxis: { title: { text: "Sector" }, automargin: true },
-      }}
-    />
+    <HBarChart rows={rows} label="Median loss by sector" format={compactUSD} labelWidth={190} />
   );
 }

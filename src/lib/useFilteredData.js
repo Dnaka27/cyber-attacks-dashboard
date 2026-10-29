@@ -20,8 +20,9 @@ export const ALL_COUNTRIES = [...new Set(ALL.map((r) => r.country_name))].sort()
 /**
  * Central filtering hook, equivalent to sidebar.py + header.py combined.
  * Empty arrays in attackVectors/sectors/qualityGrades/countries = "all selected".
+ * `ignoreCountries` skips the country filter (the globe needs every country to draw markers).
  */
-export function useFilteredData() {
+export function useFilteredData({ ignoreCountries = false } = {}) {
   const { attackVectors, sectors, qualityGrades, publicOnly, yearRange, countries } =
     useFilters();
 
@@ -33,8 +34,9 @@ export function useFilteredData() {
       if (qualityGrades.length && !qualityGrades.includes(row.quality_grade)) return false;
       if (publicOnly && !row.is_public_company) return false;
       if (row.year < yearRange[0] || row.year > yearRange[1]) return false;
-      if (countries.length && !countries.includes(row.country_name)) return false;
+      if (!ignoreCountries && countries.length && !countries.includes(row.country_name))
+        return false;
       return true;
     });
-  }, [attackVectors, sectors, qualityGrades, publicOnly, yearRange, countries]);
+  }, [attackVectors, sectors, qualityGrades, publicOnly, yearRange, countries, ignoreCountries]);
 }
