@@ -8,14 +8,13 @@ Interactive web dashboard for the [Kaggle Cyber Attacks dataset](https://www.kag
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Plotly](https://img.shields.io/badge/Plotly-5B00E8?style=for-the-badge&logo=plotly&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 ---
 
 ## About
 
-Visualizes financial and market impact data from cyber attacks across a compact, high-level set of tabs. A persistent sidebar holds the title and filters (year range, country, sector, attack vector, quality grade, and public/private companies).
+Visualizes financial and market impact data from cyber attacks as a tabbed report that fits the screen (no page scroll on desktop): an Overview with a 3D globe and KPIs, then tabs with animated SVG charts. A filter drawer holds the year range, country, sector, attack vector, quality grade, and public companies, with removable chips for the active ones. Clicking a country on the globe shows that country's KPIs; clicking one in the ranking also toggles it in the country filter.
 
 | Tab | Content |
 |---|---|
