@@ -23,6 +23,7 @@ export default function YearRangeSlider({ min, max, value, onChange }) {
           min={min}
           max={max}
           value={lo}
+          aria-label="Period start year"
           onChange={(e) => onChange([Math.min(Number(e.target.value), hi), hi])}
         />
         <input
@@ -31,6 +32,7 @@ export default function YearRangeSlider({ min, max, value, onChange }) {
           min={min}
           max={max}
           value={hi}
+          aria-label="Period end year"
           onChange={(e) => onChange([lo, Math.max(Number(e.target.value), lo)])}
         />
       </div>
