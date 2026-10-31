@@ -2,12 +2,44 @@ import { Suspense, lazy, useCallback, useMemo, useState } from "react";
 import Kpis from "./Kpis";
 import { useFilters } from "../../context/FilterContext";
 import { useFilteredData } from "../../lib/useFilteredData";
-import { groupBy, sum, sortDesc } from "../../lib/aggregations";
-import { compactUSD } from "../../lib/format";
+import { useFitMode } from "../../lib/useFitMode";
+import { groupBy, sum, median, mean, sortDesc } from "../../lib/aggregations";
+import { compactUSD, compactNumber, percent, days } from "../../lib/format";
 
 const Globe = lazy(() => import("../globe/Globe"));
 
 const TOP_COUNTRIES = 8;
+
+/** Spotlight summary under the globe, for layouts where the KPI cards sit out of sight above it. */
+function SpotCard({ name, rows, onClear }) {
+  const stats = [
+    { label: "Total loss", value: compactUSD(sum(rows.map((r) => r.total_loss_usd))) },
+    { label: "Incidents", value: compactNumber(rows.length) },
+    { label: "Median loss", value: compactUSD(median(rows.map((r) => r.total_loss_usd))) },
+    { label: "Records", value: compactNumber(sum(rows.map((r) => r.data_compromised_records))) },
+    { label: "Abnormal return (1d)", value: percent(mean(rows.map((r) => r.abnormal_return_1d))) },
+    { label: "Price recovery", value: days(median(rows.map((r) => r.days_to_price_recovery))) },
+  ];
+
+  return (
+    <div className="spot-card" role="status">
+      <div className="spot-card-head">
+        <span className="spot-card-name">{name}</span>
+        <button type="button" className="spot-card-clear" onClick={onClear} aria-label={`Clear ${name}`}>
+          &times;
+        </button>
+      </div>
+      <dl className="spot-card-stats">
+        {stats.map((st) => (
+          <div key={st.label}>
+            <dt>{st.label}</dt>
+            <dd className="num">{st.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
 
 export default function Hero({ fdf }) {
   const { countries, setCountries } = useFilters();
@@ -17,6 +49,9 @@ export default function Hero({ fdf }) {
   // Spotlighted country: its KPIs replace the aggregate ones, the ranking below stays as is.
   const [selected, setSelected] = useState(null);
   const [globeFailed, setGlobeFailed] = useState(false);
+  // Fit layout: the KPI cards sit beside the globe and follow the spotlight.
+  // Scrolling layout: they stay aggregate and a summary card under the globe shows the country.
+  const fit = useFitMode();
   const onUnavailable = useCallback(() => setGlobeFailed(true), []);
 
   const byCountry = useMemo(
@@ -42,8 +77,9 @@ export default function Hero({ fdf }) {
     () => (selected ? worldRows.filter((r) => r.country_name === selected) : []),
     [worldRows, selected],
   );
-  const kpiRows = spotlightRows.length > 0 ? spotlightRows : fdf;
-  const kpiScope = spotlightRows.length > 0 ? selected : null;
+  const kpiSpotlight = fit && spotlightRows.length > 0;
+  const kpiRows = kpiSpotlight ? spotlightRows : fdf;
+  const kpiScope = kpiSpotlight ? selected : null;
   const top = byCountry.slice(0, TOP_COUNTRIES);
   const topLoss = Math.max(...top.map((c) => c.loss), 1);
 
@@ -101,6 +137,9 @@ export default function Hero({ fdf }) {
               onUnavailable={onUnavailable}
             />
           </Suspense>
+        )}
+        {!fit && spotlightRows.length > 0 && (
+          <SpotCard name={selected} rows={spotlightRows} onClear={() => setSelected(null)} />
         )}
         <ol className="country-list" aria-label="Top headquarters countries by total loss">
           {top.map((c, i) => (

@@ -1068,6 +1068,73 @@ button {
   color: var(--bg);
 }
 
+/* spotlight summary under the globe, shown instead of the KPI spotlight on scrolling layouts */
+.spot-card {
+  width: 100%;
+  max-width: 560px;
+  padding: 12px 14px 14px;
+  border: 1px solid rgba(45, 212, 191, 0.55);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  animation: riseIn 0.4s var(--ease-out) both;
+}
+
+.spot-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.spot-card-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+.spot-card-clear {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.spot-card-clear:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.spot-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 12px;
+  margin: 10px 0 0;
+}
+
+.spot-card-stats dt {
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.spot-card-stats dd {
+  margin: 2px 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+@media (max-width: 420px) {
+  .spot-card-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .country-row.is-spotlight {
   border-color: rgba(45, 212, 191, 0.55);
   background: var(--accent-soft);
