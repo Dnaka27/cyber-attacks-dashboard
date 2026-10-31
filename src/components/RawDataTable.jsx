@@ -116,6 +116,8 @@ export default function RawDataTable({ fdf }) {
         </button>
       </div>
 
+      <p className="docket-hint">Swipe the table sideways to see all columns.</p>
+
       <div
         className="docket-table-wrap"
         ref={wrapRef}

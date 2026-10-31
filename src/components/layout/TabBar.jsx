@@ -1,8 +1,13 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 /** Top-level view switcher. Roving tabindex with arrow/Home/End keys, per the ARIA tabs pattern. */
 export default function TabBar({ tabs, active, onChange, onHome, actions }) {
   const refs = useRef({});
+
+  // The tab strip scrolls on narrow screens: keep the active tab in view.
+  useEffect(() => {
+    refs.current[active]?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [active]);
 
   function onKeyDown(e, index) {
     const last = tabs.length - 1;

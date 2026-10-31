@@ -6,7 +6,9 @@ import { GRID, MUTED, INK_SOFT } from "../../lib/palette";
 const ROW = 30;
 const M = { t: 6, r: 64, b: 6, l: 8 };
 
-function Bars({ width, height, inView, rows, labelWidth, format, showTip, hideTip }) {
+function Bars({ width, height, inView, rows, labelWidth: fullLabelWidth, format, showTip, hideTip }) {
+  // On narrow frames the label column yields space to the bars and value text.
+  const labelWidth = Math.min(fullLabelWidth, Math.max(128, width * 0.45));
   const row = Math.max(18, Math.min(44, (height - M.t - M.b) / rows.length));
   const pad = Math.round(row * 0.23);
   const tweened = useTweenedValues(
